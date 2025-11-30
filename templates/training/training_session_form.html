@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Sesja treningowa{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h2>{{ session|default:'Nowa sesja treningowa' }}</h2>
+<h2>{{ title }}</h2>
 
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form.non_field_errors }}
 
-  <button class="btn btn-primary">Zapisz</button>
-  <a href="{% url 'training_session_list' %}" class="btn btn-secondary">Powrót</a>
+  <div class="mb-3">
+    <label for="{{ form.start.id_for_label }}" class="form-label">
+      Data rozpoczęcia
+    </label>
+    {{ form.start }}
+    {{ form.start.errors }}
+  </div>
+
+  <div class="mb-3">
+    <label for="{{ form.end.id_for_label }}" class="form-label">
+      Data zakończenia
+    </label>
+    {{ form.end }}
+    {{ form.end.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Zapisz</button>
+  <a href="{% url 'training_session_list' %}" class="btn btn-secondary">Anuluj</a>
 </form>
 {% endblock %}

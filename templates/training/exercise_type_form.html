@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Typ ćwiczenia{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h2>{{ object|default:'Nowy typ ćwiczenia' }}</h2>
+<h2>{{ title }}</h2>
 
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form.non_field_errors }}
 
-  <button class="btn btn-primary">Zapisz</button>
-  <a href="{% url 'exercise_type_list' %}" class="btn btn-secondary">Powrót</a>
+  <div class="mb-3">
+    <label for="{{ form.name.id_for_label }}" class="form-label">
+      Nazwa ćwiczenia
+    </label>
+    {{ form.name }}
+    {{ form.name.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Zapisz</button>
+  <a href="{% url 'exercise_type_list' %}" class="btn btn-secondary">Anuluj</a>
 </form>
 {% endblock %}

@@ -3,12 +3,41 @@
 {% block title %}Szczegóły sesji{% endblock %}
 
 {% block content %}
-<h2>Szczegóły sesji</h2>
+<h2>Szczegóły sesji treningowej</h2>
 
-<p><strong>Start:</strong> {{ session.start }}</p>
-<p><strong>Koniec:</strong> {{ session.end }}</p>
+<ul class="list-group mb-3">
+  <li class="list-group-item"><strong>Start:</strong> {{ session.start }}</li>
+  <li class="list-group-item"><strong>Koniec:</strong> {{ session.end }}</li>
+</ul>
 
-<a href="{% url 'training_session_edit' session.id %}" class="btn btn-warning">Edytuj</a>
-<a href="{% url 'training_session_delete' session.id %}" class="btn btn-danger">Usuń</a>
-<a href="{% url 'training_session_list' %}" class="btn btn-secondary">Powrót</a>
+<h3>Wykonane ćwiczenia w tej sesji</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Typ ćwiczenia</th>
+      <th>Ciężar [kg]</th>
+      <th>Serie</th>
+      <th>Powtórzenia</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in exercises %}
+    <tr>
+      <td>{{ e.exercise_type.name }}</td>
+      <td>{{ e.weight }}</td>
+      <td>{{ e.sets }}</td>
+      <td>{{ e.reps }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">Brak ćwiczeń w tej sesji.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'training_session_list' %}" class="btn btn-secondary">
+  Wróć do listy
+</a>
 {% endblock %}
