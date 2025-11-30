@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import ExerciseType, TrainingSession, SessionExercise
 
 
@@ -17,6 +18,16 @@ class TrainingSessionAdmin(admin.ModelAdmin):
 
 @admin.register(SessionExercise)
 class SessionExerciseAdmin(admin.ModelAdmin):
-    list_display = ("exercise_type", "training_session", "weight", "sets", "reps", "created_by")
+    list_display = (
+        "exercise_type",
+        "training_session",
+        "weight",
+        "sets",
+        "reps",
+        "created_by",
+    )
     list_filter = ("exercise_type", "created_by")
-    search_fields = ("exercise_type__name", "created_by__username")
+    search_fields = (
+        "exercise_type__name",
+        "created_by__username",
+    )
