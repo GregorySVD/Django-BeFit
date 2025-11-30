@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Twoje sesje treningowe{% endblock %}
+
+{% block content %}
+<h2>Twoje sesje treningowe</h2>
+
+<a href="{% url 'training_session_create' %}" class="btn btn-primary mb-3">
+  Dodaj sesję treningową
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>Koniec</th>
+      <th>Akcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in sessions %}
+    <tr>
+      <td>{{ s.start }}</td>
+      <td>{{ s.end }}</td>
+      <td>
+        <a href="{% url 'training_session_detail' s.id %}" class="btn btn-info btn-sm">Szczegóły</a>
+        <a href="{% url 'training_session_edit' s.id %}" class="btn btn-warning btn-sm">Edytuj</a>
+        <a href="{% url 'training_session_delete' s.id %}" class="btn btn-danger btn-sm">Usuń</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">Brak sesji.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

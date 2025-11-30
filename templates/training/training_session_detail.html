@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Szczegóły sesji{% endblock %}
+
+{% block content %}
+<h2>Szczegóły sesji</h2>
+
+<p><strong>Start:</strong> {{ session.start }}</p>
+<p><strong>Koniec:</strong> {{ session.end }}</p>
+
+<a href="{% url 'training_session_edit' session.id %}" class="btn btn-warning">Edytuj</a>
+<a href="{% url 'training_session_delete' session.id %}" class="btn btn-danger">Usuń</a>
+<a href="{% url 'training_session_list' %}" class="btn btn-secondary">Powrót</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Szczegóły ćwiczenia{% endblock %}
+
+{% block content %}
+<h2>Szczegóły wykonanego ćwiczenia</h2>
+
+<p><strong>Ćwiczenie:</strong> {{ exercise.exercise_type.name }}</p>
+<p><strong>Sesja:</strong> {{ exercise.training_session.start }}</p>
+<p><strong>Serie:</strong> {{ exercise.sets }}</p>
+<p><strong>Powtórzenia:</strong> {{ exercise.reps }}</p>
+<p><strong>Ciężar:</strong> {{ exercise.weight }} kg</p>
+
+<a href="{% url 'session_exercise_edit' exercise.id %}" class="btn btn-warning">Edytuj</a>
+<a href="{% url 'session_exercise_delete' exercise.id %}" class="btn btn-danger">Usuń</a>
+<a href="{% url 'session_exercise_list' %}" class="btn btn-secondary">Powrót</a>
+{% endblock %}

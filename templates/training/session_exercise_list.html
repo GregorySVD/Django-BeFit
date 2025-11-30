@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Wykonane ćwiczenia{% endblock %}
+
+{% block content %}
+<h2>Wykonane ćwiczenia</h2>
+
+<a href="{% url 'session_exercise_create' %}" class="btn btn-primary mb-3">
+  Dodaj wykonane ćwiczenie
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Ćwiczenie</th>
+      <th>Sesja</th>
+      <th>Serie × Powt.</th>
+      <th>Ciężar</th>
+      <th>Akcje</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in exercises %}
+    <tr>
+      <td>{{ e.exercise_type.name }}</td>
+      <td>{{ e.training_session.start }}</td>
+      <td>{{ e.sets }} × {{ e.reps }}</td>
+      <td>{{ e.weight }} kg</td>
+      <td>
+        <a href="{% url 'session_exercise_detail' e.id %}" class="btn btn-info btn-sm">Szczegóły</a>
+        <a href="{% url 'session_exercise_edit' e.id %}" class="btn btn-warning btn-sm">Edytuj</a>
+        <a href="{% url 'session_exercise_delete' e.id %}" class="btn btn-danger btn-sm">Usuń</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">Brak wykonanych ćwiczeń.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

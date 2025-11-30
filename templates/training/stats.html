@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Statystyki{% endblock %}
+
+{% block content %}
+<h2>Statystyki z ostatnich 4 tygodni</h2>
+
+<p>Od: {{ since|date:"Y-m-d H:i" }}</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Ćwiczenie</th>
+      <th>Sesja</th>
+      <th>Serie × Powt.</th>
+      <th>Ciężar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in exercises %}
+    <tr>
+      <td>{{ e.exercise_type.name }}</td>
+      <td>{{ e.training_session.start }}</td>
+      <td>{{ e.sets }} × {{ e.reps }}</td>
+      <td>{{ e.weight }} kg</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Brak danych z ostatnich 28 dni.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

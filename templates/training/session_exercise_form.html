@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Wykonane ćwiczenie{% endblock %}
+
+{% block content %}
+<h2>{{ exercise|default:'Dodaj wykonane ćwiczenie' }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <button class="btn btn-primary">Zapisz</button>
+  <a href="{% url 'session_exercise_list' %}" class="btn btn-secondary">Powrót</a>
+</form>
+{% endblock %}
